@@ -6,7 +6,7 @@
             "id": "349698e8-2ade-4580-9b7c-c23652993f81",
             "actions": [
                 {
-                    "name": "Left leg",
+                    "name": "Left foot",
                     "type": "Button",
                     "id": "94bd9f14-b567-434c-aa06-7163cf3d0996",
                     "expectedControlType": "Button",
@@ -15,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Right leg",
+                    "name": "Right foot",
                     "type": "Button",
                     "id": "605fa7d7-ac46-48ea-babb-1cb9f2a74a7e",
                     "expectedControlType": "Button",
@@ -41,7 +41,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Left leg",
+                    "action": "Left foot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -52,7 +52,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Right leg",
+                    "action": "Right foot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
