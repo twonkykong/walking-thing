@@ -25,7 +25,7 @@ public class CameraMovement : MonoBehaviour
     {
         Vector2 newPos = _mousePosition.ReadValue<Vector2>() - _midScreenPoint;
 
-        _thisObjectTransform.localPosition = newPos / _midScreenPoint / new Vector2(1.5f, 2f);
+        _thisObjectTransform.localPosition = newPos / _midScreenPoint / 2f;
     }
 
     private void OnEnable()

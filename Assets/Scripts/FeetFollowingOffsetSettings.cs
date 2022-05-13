@@ -7,20 +7,25 @@ public class FeetFollowingOffsetSettings : MonoBehaviour
     [SerializeField] private float raycastDistance = 1f;
     [SerializeField] private float headOffsetValue = 0.3f;
     [SerializeField] private float cameraOffsetValue = 2f;
+    [SerializeField] private float capsuleRaycastRadius = 1f;
 
     private FeetFollowing _thisObjectFeetFollowing = null;
 
     private Transform _thisObjectTransform = null;
 
+    private int _layermask = 0;
+
     private void Awake()
     {
         _thisObjectFeetFollowing = GetComponent<FeetFollowing>();
         _thisObjectTransform = transform;
+
+        _layermask = ~LayerMask.GetMask("ignore");
     }
 
     private bool RaycastCheck(Vector3 direction)
     {
-        return Physics.Raycast(_thisObjectTransform.position, direction, raycastDistance);
+        return Physics.Raycast(_thisObjectTransform.position, direction, raycastDistance, _layermask);
     }
 
     private Vector3 CalculateOffset()

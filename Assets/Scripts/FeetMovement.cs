@@ -23,6 +23,8 @@ public class FeetMovement : MonoBehaviour
     private Transform _thisObjectTransform = null;
     private Transform _currentFoot = null;
 
+    private int _layermask = 0;
+
     private void Awake()
     {
         _thisObjectTransform = transform;
@@ -37,12 +39,14 @@ public class FeetMovement : MonoBehaviour
         _mainCamera = Camera.main;
 
         _currentFoot = leftFoot;
+
+        _layermask = ~LayerMask.GetMask("ignore");
     }
 
     private RaycastHit ScreenToWorldRaycast()
     {
         Ray ray = _mainCamera.ScreenPointToRay(_mousePosition.ReadValue<Vector2>());
-        Physics.Raycast(ray, out RaycastHit hit);
+        Physics.Raycast(ray, out RaycastHit hit, 999f, _layermask);
 
         return hit;
     }
@@ -60,16 +64,14 @@ public class FeetMovement : MonoBehaviour
         if (Vector3.Distance(_thisObjectTransform.position, worldPoint) <= distanceLimit)
         {
             foot.up = normal;
-            foot.position = worldPoint + foot.up * footLandingDistance;
-            //foot.SetParent(body);
+            foot.position = worldPoint;
+            foot.SetParent(body);
 
             Vector3 randomRotation = Vector3.up * Random.Range(-footRotationAngle, footRotationAngle);
-            //Vector3 newPos = foot.position - foot.up * footLandingDistance;
 
             foot.Rotate(randomRotation, Space.Self);
-            foot.DOLocalMove(worldPoint, footLandingDuration);
 
-            if (isAlternating) _currentFoot = (foot == leftFoot ? rightFoot : leftFoot);
+            if (isAlternating) _currentFoot = foot == leftFoot ? rightFoot : leftFoot;
         }
     }
 
