@@ -10,9 +10,7 @@ public class FeetFollowingOffsetSettings : MonoBehaviour
     [SerializeField] private float capsuleRaycastRadius = 1f;
 
     private FeetFollowing _thisObjectFeetFollowing = null;
-
     private Transform _thisObjectTransform = null;
-
     private int _layermask = 0;
 
     private void Awake()

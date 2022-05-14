@@ -10,9 +10,6 @@ public class FeetMovement : MonoBehaviour
     [SerializeField] private bool isAlternating;
 
     [SerializeField] private float distanceLimit = 15f;
-    [SerializeField] private float footLandingDistance = 0.2f;
-    [SerializeField] private float footLandingDuration = 0.3f;
-    [SerializeField] private float footRotationDuration = 0.3f;
     [SerializeField] private float footRotationAngle = 30f;
 
     private InputMaster _inputMaster = null;
@@ -54,6 +51,8 @@ public class FeetMovement : MonoBehaviour
     private void MoveFoot(Transform foot)
     {
         RaycastHit hit = ScreenToWorldRaycast();
+        if (hit.collider == null) return;
+        if (hit.collider.gameObject.layer == 7) return;
 
         Vector3 worldPoint = hit.point;
         Vector3 normal = hit.normal;

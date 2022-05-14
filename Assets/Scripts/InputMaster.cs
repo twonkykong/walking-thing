@@ -53,6 +53,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Use action"",
+                    ""type"": ""Button"",
+                    ""id"": ""45e38785-8af5-4a53-a761-89bdb0e85ed6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -88,6 +97,17 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""action"": ""Mouse position"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""27b30256-6710-4045-a22c-00694f8f4b28"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -99,6 +119,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_Player_Leftfoot = m_Player.FindAction("Left foot", throwIfNotFound: true);
         m_Player_Rightfoot = m_Player.FindAction("Right foot", throwIfNotFound: true);
         m_Player_Mouseposition = m_Player.FindAction("Mouse position", throwIfNotFound: true);
+        m_Player_Useaction = m_Player.FindAction("Use action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -161,6 +182,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Leftfoot;
     private readonly InputAction m_Player_Rightfoot;
     private readonly InputAction m_Player_Mouseposition;
+    private readonly InputAction m_Player_Useaction;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -168,6 +190,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         public InputAction @Leftfoot => m_Wrapper.m_Player_Leftfoot;
         public InputAction @Rightfoot => m_Wrapper.m_Player_Rightfoot;
         public InputAction @Mouseposition => m_Wrapper.m_Player_Mouseposition;
+        public InputAction @Useaction => m_Wrapper.m_Player_Useaction;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -186,6 +209,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @Mouseposition.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseposition;
                 @Mouseposition.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseposition;
                 @Mouseposition.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseposition;
+                @Useaction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseaction;
+                @Useaction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseaction;
+                @Useaction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseaction;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -199,6 +225,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @Mouseposition.started += instance.OnMouseposition;
                 @Mouseposition.performed += instance.OnMouseposition;
                 @Mouseposition.canceled += instance.OnMouseposition;
+                @Useaction.started += instance.OnUseaction;
+                @Useaction.performed += instance.OnUseaction;
+                @Useaction.canceled += instance.OnUseaction;
             }
         }
     }
@@ -208,5 +237,6 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnLeftfoot(InputAction.CallbackContext context);
         void OnRightfoot(InputAction.CallbackContext context);
         void OnMouseposition(InputAction.CallbackContext context);
+        void OnUseaction(InputAction.CallbackContext context);
     }
 }

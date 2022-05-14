@@ -23,7 +23,7 @@ public class FeetFollowing : MonoBehaviour
         Vector3 midPoint = (firstFoot.position + secondFoot.position) / 2;
         Vector3 finalPoint = midPoint + mainOffset + _additionalOffset;
 
-        _thisObjectTransform.position = Vector3.Lerp(_thisObjectTransform.position, finalPoint, slerpTime);
+        _thisObjectTransform.localPosition = Vector3.Lerp(_thisObjectTransform.position, finalPoint, slerpTime);
     }
 
     public void SetOffset(Vector3 newOffset)
